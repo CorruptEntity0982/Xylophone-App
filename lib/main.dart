@@ -10,10 +10,32 @@ void main() {
 class Xylophone extends StatelessWidget {
   const Xylophone({Key? key}) : super(key: key);
 
+  void playkey(int number) {
+    final player = AssetsAudioPlayer();
+    player.open(
+      Audio('assets/note$number.wav'),
+    );
+  }
+
+  Expanded buildkey({required Color color, required int number}) {
+    return Expanded(
+      child: TextButton(
+        onPressed: () {
+          playkey(number);
+        },
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll<Color>(color),
+        ),
+        child: const Text(''),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.black,
         bottomNavigationBar: const BottomAppBar(
           color: Colors.black,
         ),
@@ -26,104 +48,13 @@ class Xylophone extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    final player = AssetsAudioPlayer();
-                    player.open(
-                      Audio('assets/note1.wav'),
-                    );
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.red),
-                  ),
-                  child: const Text(''),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    final player = AssetsAudioPlayer();
-                    player.open(
-                      Audio('assets/note2.wav'),
-                    );
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.orange),
-                  ),
-                  child: const Text(''),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    final player = AssetsAudioPlayer();
-                    player.open(
-                      Audio('assets/note3.wav'),
-                    );
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.yellow),
-                  ),
-                  child: const Text(''),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    final player = AssetsAudioPlayer();
-                    player.open(
-                      Audio('assets/note4.wav'),
-                    );
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.green),
-                  ),
-                  child: const Text(""),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    final player = AssetsAudioPlayer();
-                    player.open(
-                      Audio('assets/note5.wav'),
-                    );
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.cyan),
-                  ),
-                  child: const Text(""),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    final player = AssetsAudioPlayer();
-                    player.open(
-                      Audio('assets/note6.wav'),
-                    );
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                  ),
-                  child: const Text(""),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    final player = AssetsAudioPlayer();
-                    player.open(
-                      Audio('assets/note7.wav'),
-                    );
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(Colors.purple),
-                  ),
-                  child: const Text(""),
-                ),
-              ),
+              buildkey(color: Colors.red, number: 1),
+              buildkey(color: Colors.orange, number: 2),
+              buildkey(color: Colors.yellow, number: 3),
+              buildkey(color: Colors.green, number: 4),
+              buildkey(color: Colors.cyan, number: 5),
+              buildkey(color: Colors.blue, number: 6),
+              buildkey(color: Colors.purple, number: 7),
             ],
           ),
         ),
